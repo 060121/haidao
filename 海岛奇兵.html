@@ -1,0 +1,249 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>海岛奇兵能量计算器</title>
+    <style>
+        * {
+            box-sizing: border-box;
+            font-family: "Segoe UI", sans-serif;
+        }
+
+        body {
+            margin: 0;
+            padding: 20px;
+            background-color: #f0f8ff;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            min-height: 100vh;
+        }
+
+        .calculator {
+            background: white;
+            border-radius: 15px;
+            box-shadow: 0 4px 12px rgba(0,0,0,0.1);
+            width: 100%;
+            max-width: 600px;
+            padding: 25px;
+        }
+
+        h1 {
+            color: #007bff;
+            text-align: center;
+            margin-bottom: 20px;
+            font-size: 1.8em;
+        }
+
+        .skill-category {
+            margin-bottom: 25px;
+            width: 100%;
+        }
+
+        .category-title {
+            color: #333;
+            font-size: 1.2em;
+            font-weight: 600;
+            border-bottom: 2px solid #e0e0e0;
+            padding-bottom: 8px;
+            margin-bottom: 15px;
+        }
+
+        .input-row {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 15px;
+            padding: 12px;
+            background: #f8f9fa;
+            border-radius: 8px;
+        }
+
+        .skill-label {
+            font-weight: 500;
+            color: #555;
+        }
+
+        input[type="number"] {
+            padding: 8px 12px;
+            border: 1px solid #ddd;
+            border-radius: 6px;
+            width: 80px;
+            font-size: 1em;
+            text-align: right;
+        }
+
+        button {
+            background-color: #4CAF50;
+            color: white;
+            padding: 12px 28px;
+            border: none;
+            border-radius: 25px;
+            font-size: 1em;
+            cursor: pointer;
+            width: 100%;
+            max-width: 200px;
+            margin: 20px auto;
+            transition: transform 0.2s;
+        }
+
+        button:hover {
+            transform: scale(1.03);
+        }
+
+        #result {
+            margin-top: 25px;
+            width: 100%;
+        }
+
+        .result-item {
+            margin-bottom: 10px;
+            padding: 10px;
+            border-radius: 6px;
+        }
+
+        .total-result {
+            background: #e3f2fd;
+            color: #007bff;
+            font-size: 1.1em;
+            font-weight: 600;
+            text-align: center;
+            margin-bottom: 15px;
+        }
+
+        .item {
+            display: flex;
+            justify-content: space-between;
+            color: #666;
+        }
+
+        /* 手机端适配 */
+        @media (max-width: 480px) {
+            .input-row {
+                flex-direction: column;
+                align-items: flex-start;
+                gap: 8px;
+            }
+
+            .skill-label {
+                margin-bottom: 4px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="calculator">
+        <h1>海岛奇兵能量计算器</h1>
+
+        <!-- 战舰技能 -->
+        <div class="skill-category">
+            <h2 class="category-title">战舰技能</h2>
+            <div class="input-row">
+                <div class="skill-label">火炮</div>
+                <input type="number" id="artillery" min="0" value="0">
+            </div>
+            <div class="input-row">
+                <div class="skill-label">引导弹</div>
+                <input type="number" id="flare" min="0" value="0">
+            </div>
+            <div class="input-row">
+                <div class="skill-label">多管火箭</div>
+                <input type="number" id="rocket" min="0" value="0">
+            </div>
+            <div class="input-row">
+                <div class="skill-label">震爆弹</div>
+                <input type="number" id="shock" min="0" value="0">
+            </div>
+            <div class="input-row">
+                <div class="skill-label">烟雾弹</div>
+                <input type="number" id="smoke" min="0" value="0">
+            </div>
+            <div class="input-row">
+                <div class="skill-label">医疗包</div>
+                <input type="number" id="medkit" min="0" value="0">
+            </div>
+            <div class="input-row">
+                <div class="skill-label">机器小怪</div>
+                <input type="number" id="mech" min="0" value="0">
+            </div>
+        </div>
+
+        <!-- 英雄技能 -->
+        <div class="skill-category">
+            <h2 class="category-title">英雄技能</h2>
+
+            <div class="input-row">
+                <div class="skill-label">布里克-集束榴弹</div>
+                <input type="number" id="brickGrenade" min="0" value="0">
+            </div>
+            <div class="input-row">
+                <div class="skill-label">布里克-钢铁意志</div>
+                <input type="number" id="brickShield" min="0" value="0">
+            </div>
+            <div class="input-row">
+                <div class="skill-label">巫医-晶簇小怪</div>
+                <input type="number" id="kavanMinion" min="0" value="0">
+            </div>
+            <div class="input-row">
+                <div class="skill-label">伊娃-小怪出击</div>
+                <input type="number" id="evaMinion" min="0" value="0">
+            </div>
+            <div class="input-row">
+                <div class="skill-label">列兵-震爆铁拳</div>
+                <input type="number" id="brittFist" min="0" value="0">
+            </div>
+            <div class="input-row">
+                <div class="skill-label">鲁德洛-地毯轰炸</div>
+                <input type="number" id="rudloBomb" min="0" value="0">
+            </div>
+        </div>
+
+        <button onclick="calculate()">计算总能量</button>
+
+        <div id="result"></div>
+    </div>
+
+    <script>
+        const skills = {
+            // 战舰技能 (首项, 公差)
+            artillery: {a: 3, d: 2},   // 火炮
+            flare: {a: 2, d: 1},      // 引导弹
+            rocket: {a: 10, d: 6},     // 多管火箭
+            shock: {a: 7, d: 5},      // 震爆弹
+            smoke: {a: 2, d: 1},      // 烟雾弹
+            medkit: {a: 6, d: 3},      // 医疗包
+            mech: {a: 8, d: 5},        // 机器小怪
+            
+            // 英雄技能
+            brickGrenade: {a: 3, d: 3},  // 布里克集束榴弹
+            brickShield: {a: 6, d: 12},  // 布里克钢铁意志
+            kavanMinion: {a: 8, d: 7},   // 巫医晶簇小怪
+            evaMinion: {a: 8, d: 7},     // 伊娃小怪出击
+            brittFist: {a: 3, d: 6},     // 列兵震爆铁拳
+            rudloBomb: {a: 4, d: 4}      // 鲁德洛地毯轰炸
+        };
+
+        function calculate() {
+            let total = 0;
+            const resultHTML = [];
+            
+            // 计算所有技能
+            for (const [key, {a, d}] of Object.entries(skills)) {
+                const count = parseInt(document.getElementById(key).value);
+                if (count <= 0) continue;
+                
+                const sum = count * (2*a + (count-1)*d) / 2;
+                total += sum;
+                resultHTML.push(`<div class="item"><span>${key.replace(/([A-Z])/g, ' $1')}</span><span>${sum.toFixed(0)}能量</span></div>`);
+            }
+            
+            // 显示结果
+            document.getElementById('result').innerHTML = `
+                <div class="total-result">总能量消耗：${total.toFixed(0)}</div>
+                ${resultHTML.join('')}
+            `;
+        }
+    </script>
+</body>
+</html>
